@@ -1,18 +1,3 @@
-- 基础
-  - js 基础
-    [语句和声明](docs/语句和声明/index.md)
-- 单调栈
-  - [商品折扣后的最终价格](docs/单调栈/finalPrices.1475.md)
-  - [每日温度](docs/单调栈/dailyTemperatures.739.md)
-  - [移掉 K 位数字](docs/单调栈/removeKdigits.md)
-- 链表
-  - [删除链表中的节点 - 简单](docs/链表/删除链表中的节点.md)
-  - [删除排序链表中的重复元素 - 简单](docs/链表/删除排序链表中的重复元素.md)
-  - [环形链表_简单](docs/链表/环形链表.md)
-  - [两数相加](docs/链表/两数相加.md)
-  - [反转链表 1-简单](docs/链表/反转链表1.md)
-  - [反转链表 2-中](docs/链表/反转链表2.md)
-- 字符串
-  - [有效的括号](docs/字符串/有效的括号.md)
-- 不会
-  - [部分排序](docs/不会/sub-sort-lcci.md)
+- React
+  - [基础篇](docs/React/基础篇.md)
+
