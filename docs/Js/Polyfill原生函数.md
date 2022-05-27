@@ -16,16 +16,39 @@ Object.create(proto，[propertiesObject])
 #### 实现
 
 ```js
-  Object.create = function (proto, propertiesObject) {
-      if (typeof proto !== 'object' && typeof proto !== 'function') {
-          throw new TypeError('proto 需要是个 Object 类型 ' + proto);
-      } else if (proto === null) {
-          throw new Error('proto 不能是个 null');
+  Object.myCreate = function (proto, propertyObject = undefined) {
+    if (propertyObject === null) {
+      // 这里没有判断 propertyObject 是否是原始包装对象
+      throw 'TypeError'
+    } else {
+      function Fn () {}
+      Fn.prototype = proto
+      const obj = new Fn()
+      if (propertyObject !== undefined) {
+        Object.defineProperties(obj, propertyObject)
       }
+      if (proto === null) {
+        // 创建一个没有原型对象的对象，Object.create(null)
+        obj.__proto__ = null
+      }
+      return obj
+    }
+  }
+```
 
-      function F() {}
-      F.prototype = proto;
+#### 示例
 
-      return new F();
-  };
+```js
+// 第二个参数为 null 时，抛出 TypeError
+// const throwErr = Object.myCreate({a: 'aa'}, null)  // Uncaught TypeError
+// 构建一个以
+const obj1 = Object.myCreate({a: 'aa'})
+console.log(obj1)  // {}, obj1 的构造函数的原型对象是{a: 'aa'}
+const obj2 = Object.myCreate({a: 'aa'}, {
+  b: {
+    value: 'bb',
+    enumerable: true
+  }
+})
+console.log(obj2)  // {b: 'bb'}, obj2 的构造函数的原型对象是{a: 'aa'}
 ```

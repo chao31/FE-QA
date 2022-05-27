@@ -131,8 +131,7 @@ img {
 
 /* --------------- 我的个性化 --------- */
 :root { 
-  --theme-color: #7e95de;
-  --hue-inline-deg: 49deg;
+  --theme-color: #5f71f9;
 }
 
 .home-container {
@@ -140,22 +139,18 @@ img {
   font-size: 4rem;
 }
 
+/* 渐变绿 */
+/* .page_toc .active,
+.page_toc .active:hover span,
+.page_toc ul a:hover span, */
+.markdown-section h3,
 .home-container,
 .app-name-link {
-  color: #f35626;
-  background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation: hue 60s infinite linear;
-}
-
-@keyframes hue {
-  0% {
-    -webkit-filter: hue-rotate(var(--hue-inline-deg));
-  }
-  100% {
-      -webkit-filter: hue-rotate(var(--hue-inline-deg));
-  }
+  color: #f35626 !important;
+  background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a) !important;
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent!important;
+  -webkit-filter: hue-rotate(49deg)!important;
 }
 
 .github-corner svg {
@@ -194,6 +189,7 @@ img {
 :root { 
   --code-inline-background: #fff5f5;
   --code-inline-color: #ff502c;
+  --selection-color: #3884468c;
 
   /* 修改 code 关键字颜色 */
   --code-theme-text:   #86a0f0;
