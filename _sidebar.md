@@ -1,6 +1,11 @@
+- 基础
+  - [SEO](docs/基础/SEO.md)
+  - [JS 类型及检测方式](docs/基础/类型及检测方式.md)
 - React
   - [基础篇](docs/React/基础篇.md)
 - Js
   - [Polyfill 原生函数](docs/Js/Polyfill原生函数.md)
+  - [防抖和节流](docs/高频手写/防抖和节流.md)
+  - [高阶函数和柯里化](docs/高频手写/高阶函数和柯里化.md)
 - 算法
   - [kmp 算法](docs/算法/kmp算法.md)

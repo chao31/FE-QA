@@ -143,6 +143,7 @@ img {
 /* .page_toc .active,
 .page_toc .active:hover span,
 .page_toc ul a:hover span, */
+.markdown-section h2,
 .markdown-section h3,
 .home-container,
 .app-name-link {
@@ -182,6 +183,37 @@ img {
   -webkit-filter: hue-rotate(225deg)
 }
 
+/* 修改 > 引用风格，改为逗号 */
+.markdown-section blockquote {
+  position: relative;
+  padding: 1rem 1rem 1rem 3.125rem;
+  background: #d8d9f2;
+  border: none;
+  line-height: 1.7rem;
+  font-family: "IBM Plex Sans",sans-serif;
+  font-style: italic;
+  border-radius: 10px;
+  font-weight: 900;
+}
+
+.markdown-section blockquote code {
+  background: #bbbddf !important;
+  color: #6c6e97 !important; 
+}
+
+.markdown-section blockquote:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 20px;
+  height: 16px;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAgCAQAAAAV6oiUAAABYElEQVRIx7WVPU7DQBCFH5uENBFCFDQIAsEJiJYTcAO4QS7JDbgBRQDbkYgCNDSRDOInCVSwazTPnlmU2XL8+WnevLUBuSb4IicBq2vKnMpAB0sCvKNBRBp4ozIdJyJ9rJGXpViQThdt0pmikGWOqTF3tFPJyDJHFLmhnUpGlhlQ5JZ2VMw5Xd8lxc8oc/X3Ufe7dLtNBuZHpkeRlHYMTP00o4hpRkwmiZjGzKxjQZY5A6+CMJ9oycAJzUz5XATMjpIZetN60FWuCoDAuJpllmusCoDAuJplhvWEQhWAsF7x4GUOzbMYGYtpufLWCIwD0MKeCskipsm8zD6aZtO2sWE1rR8RZyPjDDcgi7g1gWkDFTDDs+onFtYc915mdXGeYO5lkoicGRmHJg5WfWsAh1322a4wbQubNsapo5lGxDn1MokSGZs3U5pGl5kPTM05izAtx9Js2iNerNP84ycAAN906c65Frn+7QAAAABJRU5ErkJggg==') 0 0 no-repeat;
+  background-size: contain;
+  opacity: .15;
+}
+
 
 
 
@@ -191,14 +223,48 @@ img {
   --code-inline-color: #ff502c;
   --selection-color: #3884468c;
 
-  /* 修改 code 关键字颜色 */
+  /* 修改 code 样式和关键字颜色 */
   --code-theme-text:   #86a0f0;
   --code-theme-selector: #bda7f3;
   --code-theme-keyword: #b88080;
   --code-theme-selection: #394a52;
   --code-theme-tag: #86a676;
+  --code-block-padding: 2.75em 1.5em 1.5em 1.5em;
 }
 
 .sidebar-nav li>a:before, .sidebar-nav li>strong:before {
   display: none;
 }
+
+/* 左侧 sider 滚动条隐藏 */
+.sidebar::-webkit-scrollbar {
+  width: 0px!important;
+}
+
+/* code 块左上角 3 个圆标 */
+.markdown-section pre[data-lang]::before {
+  content: ' ';
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  top: 0.75em;
+  left: 0.75em;
+  background: #fc625d;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  border-radius: 50%;
+}
+
+/*「 strong 」的设置*/
+.markdown-section strong:before {
+  content: "「";
+}
+
+.markdown-section strong:after {
+  content: "」";
+}
+
+.markdown-section strong {
+  color:var(--theme-color)
+}
+
+
