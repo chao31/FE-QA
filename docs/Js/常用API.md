@@ -1,0 +1,55 @@
+## requestAnimationFrame
+
+### Usage
+
+```js
+window.requestAnimationFrame(callback);
+```
+
+参数：
+
+- `callback`：下一帧之前要调用的函数。`callback`会被传入 `DOMHighResTimeStamp` 参数（时间戳，最小精度为 1ms，可以用它计算每次调用之间的时间间隔，否则动画在高刷新率的屏幕中会运行得更快）。
+- `返回值`：是个非零值，请求 ID 。可以传这个值给 `window.cancelAnimationFrame()` 以取消回调函数。
+
+### Example
+
+```js
+var s = 0
+function f(DOMHighResTimeStamp) {
+  console.log(s++);
+  console.log(DOMHighResTimeStamp);
+  if (s < 99) {
+    window.requestAnimationFrame(f)
+  }
+}
+window.requestAnimationFrame(f)
+```
+
+### 为什么不用 setTimeout 、setInterval ？
+
+> `setTimeout` 、`setInterval` 的显著缺陷就是设定的时间并不精确，它们只是在设定的时间后将相应任务添加到任务队列中，而任务队列中如果还有前面的任务尚未执行完毕，那么后添加的任务就必须等待，这个等待的时间造成了原本设定的动画时间间隔不准。`requestAnimationFrame` 的到来就是解决这个问题的 ，它采用的是系统时间间隔 (约 16.7ms)，保持最佳绘制效果与效率，使各种网页动画有一个统一的刷新机制，从而节省系统资源，提高系统性能。
+
+### 浏览器刷新率（帧）
+
+页面的内容都是一帧一帧绘制出来的，浏览器刷新率代表浏览器一秒绘制多少帧。目前浏览器大多是 60Hz（60 帧/s），每一帧耗时也就是在 16ms 左右。原则上说 1s 内绘制的帧数越多，画面表现就也越细腻。那么在这一帧的（16ms）过程中浏览器又干了啥呢？
+
+![图片 1](https://chao31.github.io/pics/FE-QA/anatomy-of-a-frame.svg)
+
+![图片 2](https://chao31.github.io/pics/FE-QA/life-of-frame_20220614154456.png)
+
+通过上面 2 张图可以清楚的知道，浏览器一帧会经过下面这几个过程：
+
+1. 开始一帧
+2. 输入事件的处理：`touchmove`、`click`、`scroll`等都应该最先触发，每帧触发一次（但也不一定）
+3. 执行 `RequestAnimationFrame`
+4. 布局（Layout）
+5. 绘制（Paint）
+6. 若还有时间，执行 `RequestIdelCallback`
+7. 结束一帧
+
+其中，第六步的 `RequestIdelCallback` 事件不是每一帧结束都会执行，只有在一帧的 16ms 中做完了前面 6 件事儿且还有剩余时间，才会执行。这里提一下，如果一帧执行结束后还有时间执行 `RequestIdelCallback` 事件，那么下一帧需要在事件执行结束才能继续渲染，所以 `RequestIdelCallback` 执行不要超过 30ms，如果长时间不将控制权交还给浏览器，会影响下一帧的渲染，导致页面出现卡顿和事件响应不及时。
+
+---
+参考：
+1. [前端工程师的自我修养：React Fiber 是如何实现更新过程可控的](https://www.infoq.cn/article/FlEX4gdZigdMJueq4orw)
+2. [[译] 浏览器帧原理剖析](https://juejin.cn/post/6844903808762380296)
