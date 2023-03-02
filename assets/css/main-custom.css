@@ -139,6 +139,11 @@ img {
   font-size: 4rem;
 }
 
+/* 隐藏左边👈🏻navbar 的 展开 icon */
+.sidebar-nav li>a {
+  background-image: none!important;
+}
+
 /* 渐变绿 */
 /* .page_toc .active,
 .page_toc .active:hover span,
@@ -230,6 +235,9 @@ img {
   --code-theme-selection: #394a52;
   --code-theme-tag: #86a676;
   --code-block-padding: 2.75em 1.5em 1.5em 1.5em;
+
+  /* 修改二级小文件夹图标旁边的字体padding */
+  --sidebar-nav-pagelink-padding: .23em;
 }
 
 .sidebar-nav li>a:before,
@@ -271,3 +279,9 @@ img {
 /* .fabs {
   display: none;
 } */
+
+/* 修复文件夹小图标不居中 */
+.sidebar-nav ul:not(.app-sub-sidebar)>.level-1::before {
+  top: 5px;
+  left: -20px;
+}
