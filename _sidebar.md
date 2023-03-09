@@ -1,4 +1,13 @@
 - JS
+  - [基础](docs/JS/基础.md)
+  - [JS数据类型及存储](docs/JS/JS数据类型及存储.md)
+  - [Promise](docs/JS/Promise.md)
+  - [async和await的异步总结](docs/JS/async和await的异步总结.md)
+  - [forEach同/异步问题](docs/JS/forEach同、异步问题.md)
+  - [Event-Loop(事件循环)](docs/JS/Event-Loop.md)
+  - [this的绑定](docs/JS/this的绑定.md)
+  - [模块化](docs/JS/模块化.md)
+  - [内存泄漏](docs/JS/内存泄漏.md)
   - [常用 API](docs/JS/常用API.md)
   - [Polyfill 原生函数](docs/JS/Polyfill原生函数.md)
 - CSS
@@ -7,6 +16,9 @@
 - React
   - [基础篇](docs/React/基础篇.md)
   - [源码和实现](docs/React/源码和实现.md)
+- 正则
+  - [正则基础知识](docs/正则/正则基础知识.md)
+  - [常见的正则应用](docs/正则/常见的正则应用.md)
 - 高频手写
   - [防抖和节流](docs/高频手写/防抖和节流.md)
   - [高阶函数和柯里化](docs/高频手写/高阶函数和柯里化.md)
@@ -14,4 +26,3 @@
   - [kmp 算法](docs/算法/kmp算法.md)
 - 基础
   - [SEO](docs/基础/SEO.md)
-  - [JS 类型及检测方式](docs/基础/类型及检测方式.md)
