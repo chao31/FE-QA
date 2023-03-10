@@ -4,7 +4,7 @@
 - `forEach`是异步执行
 - `for-in`、`for-of`是同步执行
 
-## 为什么forEach没有按循环的顺序执行
+## forEach是异步执行的
 
 借用网上一个例子：
 
@@ -98,7 +98,7 @@ test();
 ```
 看执行结果你就懂了
 
-## 使用for of
+## for of 是同步执行的
 
 ```js
 function handle(x) {
