@@ -285,3 +285,8 @@ img {
   top: 5px;
   left: -20px;
 }
+
+/* 固定图片的高度，避免加载到图片后闪一下  */
+.markdown-section img {
+  height: 300px !important;
+}
