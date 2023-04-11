@@ -1,3 +1,17 @@
+通过本文你将学到：
+
+- `await` 后面跟 `Promise` 对象：会`阻断`后续代码，等待状态变为 `fulfilled` ，才获取结果并`继续执行`
+- `await` 后续跟`非 Promise` 对象：会直接返回
+- `await`的`右边` `Promise` 执行完后，`下面行`的代码进入`微任务`
+```js
+async function fn1 () {
+    console.log('start');
+    const res = await fn2(); // fn2() 会执行
+    console.log(res) // 这一行以及下面的 code，都进入微任务
+    ...
+}
+```
+
 ## 消灭回调函数
 
 - `promise.then`链式调用，但也是基于回调函数
@@ -28,7 +42,7 @@ console.log( fn1() ) // Promise {<fulfilled>: 100}
 
 举例如下： 
 
-### 例1，中断
+### 例 1，中断
 ```js
 (async function () {
   const p1 = new Promise(() => {})
@@ -37,9 +51,9 @@ console.log( fn1() ) // Promise {<fulfilled>: 100}
 })()
 ```
 
-`await p1`会中断，等待`p1`的状态改变，但`p1`一直处于pending状态，所以后面的console不会执行，但下面这样`console`就会执行
+`await p1`会中断，等待`p1`的状态改变，但`p1`一直处于 pending 状态，所以后面的 console 不会执行，但下面这样`console`就会执行
 
-### 例2，等待后继续执行
+### 例 2，等待后继续执行
 ```js
 (async function () {
   const p1 = Promise.resolve(100)
@@ -48,7 +62,7 @@ console.log( fn1() ) // Promise {<fulfilled>: 100}
 })()
 ```
 
-### 例3，await一个非Promise对象
+### 例 3，await 一个非 Promise 对象
 `await` 后续跟非 `Promise` 对象：会直接返回
 ```js
 (async function () {
@@ -57,18 +71,18 @@ console.log( fn1() ) // Promise {<fulfilled>: 100}
 })()
 ```
 
-### 例4，await到了reject状态
+### 例 4，await 到了 reject 状态
 
 ```js
 (async function () {
-  const p3 = Promise.reject('some err') // rejected状态，不会执行下面的then
-  const res = await p3 // await 相当于then
+  const p3 = Promise.reject('some err') // rejected 状态，不会执行下面的 then
+  const res = await p3 // await 相当于 then
   console.log(res) // 不会执行
 })()
 ```
 `await` 相当于`then`，所以`reject`状态只会走到`try catch`里面，但没写，后面的代码就不会执行
 
-### 例5，try/catch捕获rejected状态
+### 例 5，try/catch 捕获 rejected 状态
 
 ```js
 (async function () {
@@ -88,16 +102,16 @@ console.log( fn1() ) // Promise {<fulfilled>: 100}
 - `await` 处理 `Promise` 成功
 - `try...catch` 处理 `Promise` 失败
 
-## async、await和微任务
+## async、await 和微任务
 
-`await` 是同步写法，但本质还是异步调用。await下面的代码，是放入callback回调中，相当于then
+`await` 是同步写法，但本质还是异步调用。await 下面的代码，是放入 callback 回调中，相当于 then
 
 ```js
 async function async1 () {
   console.log('async1 start')
   await async2()
   console.log('async1 end') // 关键在这一步，它相当于放在 callback 中，最后执行
-  // 类似于Promise.resolve().then(()=>console.log('async1 end'))
+  // 类似于 Promise.resolve().then(()=>console.log('async1 end'))
 }
 
 async function async2 () {
@@ -123,12 +137,12 @@ async function async1 () {
   console.log('async1 start') // 2
   await async2()
 
-  // await后面的下面三行都是异步回调callback的内容
+  // await 后面的下面三行都是异步回调 callback 的内容
   console.log('async1 end') // 5 关键在这一步，它相当于放在 callback 中，最后执行
-  // 类似于Promise.resolve().then(()=>console.log('async1 end'))
+  // 类似于 Promise.resolve().then(()=>console.log('async1 end'))
   await async3()
   
-  // await后面的下面1行都是异步回调callback的内容
+  // await 后面的下面 1 行都是异步回调 callback 的内容
   console.log('async1 end2') // 7
 }
 
@@ -143,15 +157,15 @@ console.log('script start') // 1
 async1()
 console.log('script end') // 4
 ```
-即，只要遇到了 await ，后面的代码都相当于放在 callback(微任务) 里。
+即，只要遇到了 await，后面的代码都相当于放在 callback(微任务) 里。
 
 ### 经典的面试题
 
 ```js
 async function async1 () {
   console.log('async1 start')
-  await async2() // 这一句会同步执行，返回 Promise ，其中的 `console.log('async2')` 也会同步执行
-  console.log('async1 end') // 上面有 await ，下面就变成了“异步”，类似 cakkback 的功能（微任务）
+  await async2() // 这一句会同步执行，返回 Promise，其中的 `console.log('async2')` 也会同步执行
+  console.log('async1 end') // 上面有 await，下面就变成了“异步”，类似 cakkback 的功能（微任务）
 }
 
 async function async2 () {
@@ -180,10 +194,10 @@ console.log('script end')
 // 2. setTimeout —— 宏任务（先注册先执行）
 // 3. then —— 微任务
 
-// 同步代码执行完毕（event loop - call stack被清空）
+// 同步代码执行完毕（event loop - call stack 被清空）
 // 执行微任务
-// 尝试DOM渲染
-// 触发event loop执行宏任务
+// 尝试 DOM 渲染
+// 触发 event loop 执行宏任务
 
 // 输出
 // script start 
