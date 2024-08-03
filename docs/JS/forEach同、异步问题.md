@@ -180,6 +180,34 @@ test()
 // 结束
 ```
 
+## 并行执行每一个Promise
+
+```js
+function handle(x) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(x)
+            resolve(x)
+           }, 1000 * x)
+    })
+}
+
+async function test() {
+    let arr = [3, 2, 1]
+    
+
+    await Promise.all(arr.map(handle));
+    console.log('结束')
+}
+
+test()
+
+// 1
+// 2
+// 3
+// 结束
+```
+
 参考：
 
 1. [forEach 和 for of 的执行异步顺序问题](https://juejin.cn/post/6844904129471463432)
